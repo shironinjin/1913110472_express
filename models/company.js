@@ -7,7 +7,7 @@ const companySchema = new Schema({
   address: {
     provice: String,
   },
-});
+},{collection:"setting"}); //ใช้เวลาช่ือไม่ตรงกะฐานข้อมูล
                                 //ชื่อโมเดล. ชื่อScheme
 const company = mongoose.model("Companys",companySchema);
 
