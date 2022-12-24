@@ -2,16 +2,23 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //สร้างScheme
-const schema = new Schema({
-    name: {type:String,require:true,trim:true},
-    price:{type:Number},
-    shop:{type:Schema.Types.ObjectId, ref:'Shop'}
+const schema = new Schema(
+  {
+    name: { type: String, require: true, trim: true },
+    price: { type: Number },
+    shop: { type: Schema.Types.ObjectId, ref: "Shop" },
+  },
+  {
+    toJSON:{virtuals:true},
+    timestamps: true,
+    collection: "menus",
+  }
+); 
 
-    
-},{
-    timestamps:true,
-    collection:"menus"}); //ใช้เวลาช่ือไม่ตรงกะฐานข้อมูล
-                                //ชื่อโมเดล. ชื่อScheme
-const menu = mongoose.model("Menu",schema);
+schema.virtual("price_vat").get(function () {
+    return(this.price*0.07) +this.price
+  });
+  
+const menu = mongoose.model("Menu", schema);
 
 module.exports = menu;
