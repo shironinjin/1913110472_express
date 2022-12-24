@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //สร้างScheme
-const staffSchema = new Schema({
+const shopSchema = new Schema({
+
+  
   name: {type:String,require:true,trim:true},
   photo:{type:String,default:'nopic.png'},
   location:{
@@ -15,9 +17,8 @@ const staffSchema = new Schema({
 
 },{
     timestamps:true,
-    collection:"shops"
-}); //ใช้เวลาช่ือไม่ตรงกะฐานข้อมูล
+    collection:"shops"}); //ใช้เวลาช่ือไม่ตรงกะฐานข้อมูล
                                 //ชื่อโมเดล. ชื่อScheme
-const shop = mongoose.model("Shop",staffSchema);
+const shop = mongoose.model("Shop",shopSchema);
 
 module.exports = shop;
