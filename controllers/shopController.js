@@ -1,5 +1,6 @@
 const Shop = require("../models/shop");
 const Menu = require("../models/menu");
+const config = require('../config/index')
 
 exports.shop = async (req, res, next) => {
     const shops = await Shop.find().sort({ _id: -1 });
@@ -8,7 +9,7 @@ exports.shop = async (req, res, next) => {
         return{
             id:shop._id,
             name:shop.name,
-            photo:'http://localhost:3000/images/' + shop.photo,
+            photo:config.DOMAIN + shop.photo,
             location:shop.location,
 
         }
