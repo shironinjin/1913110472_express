@@ -4,7 +4,7 @@ var router = express.Router();
 const userController =require('../controllers/userController')
 
 const { body } = require('express-validator');
-const user = require("../models/user");
+
 const passportJWT = require('../middleware/passportJWT')
 
 /* GET users listing. */
