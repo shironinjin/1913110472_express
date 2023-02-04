@@ -4,6 +4,8 @@ const uuidv4 = require("uuid");
 const { promisify } = require("util");
 const writeFileAsync = promisify(fs.writeFile);
 
+const { validationResult } = require("express-validator");
+
 const Staff = require("../models/staff");
 const config = require("../config");
 
@@ -21,12 +23,20 @@ exports.staff = async (req, res, next) => {
 };
 
 exports.insert = async (req, res, next) => {
-  const { name, photo } = req.body;
+  const { name, salary } = req.body;
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = new Error("Input is incorrect");
+    error.statusCode = 422;
+    error.validation = errors.array();
+    throw error;
+  }
 
   let staff = new Staff({
     name: name,
-    //salary: salary,
-    photo: photo && (await saveImageToDisk(photo)),
+    salary: salary,
+    //photo: photo && (await saveImageToDisk(photo)),
   });
   await staff.save();
 
