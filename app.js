@@ -12,6 +12,7 @@ var staffRouter = require("./routes/staff");
 var shopRouter = require("./routes/shop");
 
 const errorHandler = require('./middleware/errorHandle')
+const passport = require('passport');
 
 var app = express();
 
@@ -25,11 +26,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(passport.initialize());
+
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use("/company", companiesRouter);
 app.use("/staff", staffRouter);
 app.use("/shop", shopRouter);
+
 
 app.use(errorHandler)
 module.exports = app;
