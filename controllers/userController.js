@@ -101,7 +101,7 @@ exports.login = async(req,res,next) =>{
   }
 } 
 exports.profile = (req, res, next) => {
-  const {name,email,role} = req.user
+  const {role,name,email} = req.user
   res.status(200).json({ 
     name:name,
     email:email,

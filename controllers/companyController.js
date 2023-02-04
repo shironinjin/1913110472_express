@@ -1,7 +1,7 @@
 const Company = require("../models/company");
 
 exports.company = async (req, res, next) => {
-  const company = await Company.find().sort({ _id: -1 });
+  const company = await Company.find();
   res.status(200).json({
     data: company,
   });
